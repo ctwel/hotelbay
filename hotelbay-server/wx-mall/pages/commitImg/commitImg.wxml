@@ -1,0 +1,88 @@
+<view class="container">
+  <view class="weui-cells">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <view class="weui-uploader">
+          <view class="weui-uploader__hd">
+            <view class="weui-uploader__title" style='text-align: center'>身份证正面照片</view>
+            <view class="weui-uploader__info"></view>
+          </view>
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files">
+              <block wx:for="{{frontImg}}" wx:for-item="image">
+                <view class="weui-uploader__file">
+                  <image class="weui-uploader__img" src="{{image.src}}" data-src="{{image}}" bindtap="previewFrontImage" bindlongpress="deleteFrontImage"></image>
+                </view>
+              </block>
+            </view>
+            <view wx:if="{{frontImg.length < 1}}">
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseFrontImage"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <view class="weui-uploader">
+          <view class="weui-uploader__hd">
+            <view class="weui-uploader__title" style='text-align: center'>身份证背面照片</view>
+            <view class="weui-uploader__info"></view>
+          </view>
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files">
+              <block wx:for="{{backImg}}" wx:for-item="image">
+                <view class="weui-uploader__file">
+                  <image class="weui-uploader__img" src="{{image.src}}" data-src="{{image}}" bindtap="previewBackImage" bindlongpress="deleteBackImage"></image>
+                </view>
+              </block>
+            </view>
+            <view wx:if="{{backImg.length < 1}}">
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseBackImage"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <view class="weui-uploader">
+          <view class="weui-uploader__hd">
+            <view class="weui-uploader__title" style='text-align: center'>手持身份证照片</view>
+            <view class="weui-uploader__info"></view>
+          </view>
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files">
+              <block wx:for="{{catchImg}}" wx:for-item="image">
+                <view class="weui-uploader__file">
+                  <image class="weui-uploader__img" src="{{image.src}}" data-src="{{image}}" bindtap="previewCatchImage" bindlongpress="deleteCatchImage"></image>
+                </view>
+              </block>
+            </view>
+            <view wx:if="{{catchImg.length < 1}}">
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseCatchImage"></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-btn">
+    <view class="l l-collect homeBox" bindtap="goUrl">
+      <image class="icon" src="../../static/images/ic_menu_choice_nor.png"></image>
+      <text>首页</text>
+    </view>
+    <!-- <view class="l l-collect back}}">
+      <image class="icon" src="{{ collectBackImage }}"></image>
+    </view> -->
+    <view class="r" bindtap="checkoutOrder">确认上传</view>
+  </view>
+</view>

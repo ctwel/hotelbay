@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "号码详情",
+  "usingComponents": {
+    "count-down-list": "../../component/count-down-list/count-down-list"
+  }
+}

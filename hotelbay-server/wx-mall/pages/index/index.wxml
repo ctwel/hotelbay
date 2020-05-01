@@ -1,0 +1,90 @@
+<view class="container">
+	<view class="search">
+		<navigator url="/pages/search/search" class="input">
+			<image class="icon"></image>
+			<input class="txt" value="{{keywords}}" disabled="true" readOnly="true" placeholder="共{{goodsCount}}款靓号"></input>
+		</navigator>
+	</view>
+
+	<view class="add-address">
+		<view class="add-form">
+			<view class="form-item3">
+				<input class="input {{openSelectAttribute ? 'selected' : ''}}" bindtap="chooseAttribute" value="靓号:{{attributeName}}" disabled="true" placeholder="靓号" />
+			</view>
+			<view class="form-item2">
+				<input class="input {{openSelectCategory ? 'selected' : ''}}" bindtap="chooseCategory" value="网络制式:{{categoryName}}" disabled="true" placeholder="网络制式" />
+			</view>
+      <view class="form-item1">
+				<input class="input {{openSelectRegion ? 'selected' : ''}}" value="归属地:{{address.full_region}}" disabled="true" bindtap="chooseRegion" placeholder="归属地" />
+			</view>
+			
+		</view>
+
+		<view class="attribute-select" wx:if="{{openSelectAttribute}}">
+			<view class="hd">
+				<view class="region-selected">
+					<view class="item"></view>
+				</view>
+				<view class="done {{selectAttributeDone ? '' : 'disabled'}}" bindtap="doneSelectAttribute">确定</view>
+			</view>
+			<scroll-view scroll-y class="bd">
+				<view class="region-list">
+					<view class="item {{item.selected ? 'selected' : ''}}" bindtap="selectAttribute" data-attribute-index="{{item.id}}" wx:for="{{attributeList}}" wx:key="{{item.id}}">{{item.name}}</view>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+
+
+
+	<view class="category-select" wx:if="{{openSelectCategory}}">
+		<view class="hd">
+			<view class="region-selected">
+				<view class="item"></view>
+			</view>
+			<view class="done {{selectCategoryDone ? '' : 'disabled'}}" bindtap="doneSelectCategory">确定</view>
+		</view>
+		<scroll-view scroll-y class="bd">
+			<view class="region-list">
+				<view class="item {{item.selected ? 'selected' : ''}}" bindtap="selectCategory" data-category-index="{{item.id}}" wx:for="{{categoryList}}" wx:key="{{item.id}}">{{item.name}}</view>
+			</view>
+		</scroll-view>
+	</view>
+
+	<view class="region-select" wx:if="{{openSelectRegion}}">
+		<view class="hd">
+			<view class="region-selected">
+				<view class="item {{item.id == 0 ? 'disabled' : ''}} {{(regionType -1) === index ? 'selected' : ''}}" bindtap="selectRegionType" data-region-type-index="{{index}}" wx:for="{{selectRegionList}}" wx:key="{{item.id}}">{{item.name}}</view>
+			</view>
+			<view class="done {{selectRegionDone ? '' : 'disabled'}}" bindtap="doneSelectRegion">确定</view>
+		</view>
+		<scroll-view scroll-y class="bd">
+			<view class="region-list">
+				<view class="item {{item.selected ? 'selected' : ''}}" bindtap="selectRegion" data-region-index="{{index}}" wx:for="{{regionList}}" wx:key="{{item.id}}">{{item.name}}</view>
+			</view>
+		</scroll-view>
+	</view>
+
+	<view class="cate-item" wx:if="{{ goodsList.length > 0 }}">
+		<view class="b">
+			<block wx:for="{{goodsList}}" wx:for-index="iindex" wx:for-item="iitem" wx:key="{{iitem.id}}">
+				<navigator class="item {{iindex % 2 == 0 ? 'item-b' : ''}}" url="../goods/goods?id={{iitem.id}}">
+					<!-- <image class="img" src="{{iitem.list_pic_url}}" background-size="cover"></image> -->
+					<text class="name">{{iitem.name}}</text>
+					<view class="tx price">
+						<text class='pri dzprice'>￥{{iitem.retail_price || '0.00'}}</text>
+						<text class='pri hfprice'> 含{{iitem.retail_price/2 || '0.00'}}元话费</text>
+						<!-- <text class='pri yjprice' wx:if="{{item.market_price}}">￥{{item.market_price}}</text> -->
+					</view>
+				</navigator>
+			</block>
+		</view>
+	</view>
+
+	<view class="empty-view" wx:if="{{ goodsList.length <= 0 }}">
+		<image class="icon" src="../../static/images/allorder.png"></image>
+		<text class="text">无商品信息</text>
+	</view>
+</view>
+
+<view class="bg-mask" bindtap="cancelSelectRegion" wx:if="{{openSelectRegion || openSelectCategory || openSelectAttribute}}"></view>
